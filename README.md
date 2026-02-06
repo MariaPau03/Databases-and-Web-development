@@ -9,4 +9,4 @@
 - The <style> element contains the styles for the website (layout/design)
 - The <body> element contains the visible page content
 - The <h1> element defines a large heading
-- The <p> element defines a paragraph
+- The '<p>' element defines a paragraph
