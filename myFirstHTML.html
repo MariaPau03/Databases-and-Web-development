@@ -1,29 +1,81 @@
 <!DOCTYPE html> 
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>My Personal Page</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
-            <h1>Welcome to My World</h1>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maria Pau | Biotechnologist & Bioinformatitian student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">MP</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button></li>
+        </ul>
+    </nav>
 
-        <main>
-            <p>I am learning how to build a website from scratch!</p>
-            <button id="theme-toggle">Switch Theme</button>
-            
-            <hr> <h2>About This Project</h2>
-            <h3>My Goals</h3>
-            <p><a href="http://www.upf.edu"><b>Hello</b> world!</a> Check out my university.</p>
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333;">
-                <h2>About This Project</h2>
-                <p style="color: #a0a0a0;">I am learning how to build a website from scratch!</p>
+    <main>
+        <section id="about" class="section">
+            <div class="about-container">
+                <img src="my-photo.jpg" alt="Maria Pau" class="profile-photo">
+                <div class="about-text">
+                    <h1>Hi, I'm Maria Pau ;)</h1>
+                    <p class="subtitle">Biotechnologist & Bioinformatician student </p>
+                </div>
+            <div class="about-text">
+                <h1>Hi, I'm Maria Pau ;)</h1>                
+                <div class="card about-bio">
+                    <p>
+                        I am a <strong>biotechnologist</strong> trained at Universitat de Lleida, with hands-on experience in molecular biology and microbiology. Currently, I am pursuing my Master's at <span>UPF & UB</span> in <strong>Bioinformatics for Health Sciences</strong>.
+                    </p>
+                    <p>
+                        My professional curiosity lies at the intersection of <span>structural biology and physics</span>. I have built a technical profile tailored for <strong>supercomputing environments</strong>, specializing in predictive modeling and data manipulation.
+                    </p>
+                    <p>
+                        <strong>Current Project:</strong> Developing a <span>ligand binding site predictor</span> for proteins using Python.
+                    </p>
+                </div>
+
+                <div class="skills-container">
+                    <div class="skill-group">
+                        <h4>Languages & Data</h4>
+                        <div class="tags">
+                            <span>Python</span><span>NumPy</span><span>Pandas</span><span>PyTorch</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4>Structural & Research</h4>
+                        <div class="tags">
+                            <span>PyMOL</span><span>AlphaFold</span><span>AutoDock Vina</span><span>Biopython</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4>Workflow</h4>
+                        <div class="tags">
+                            <span>Git</span><span>Conda</span><span>HPC</span><span>Jupyter</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </main>
+          
+        </section>
 
-        <script src="script.js"></script>
-    </body>
+        <section id="projects" class="section">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <p>A showcase of my latest work and experiments.</p>
+            </div>
+            
+            <div class="project-grid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Maria Pau. Built from scratch with ❤️</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
