@@ -22,22 +22,16 @@ window.addEventListener('scroll', () => {
 // Create and array of objects
 const myProjects = [
     {
-        title: "My_project_1",
-        description: "A high-end dark mode landing page.",
+        title: "RXINSIGHT",
+        description: "RxInsight is a patient-centered web application designed to bridge the gap between complex pharmaceutical data and everyday health safety",
         link: "#",
-        tags: ["HTML", "CSS"]
+        tags: ["Python", "Flask", "MySQL"]
     },
     {
-        title: "My_project_2",
-        description: "A dynamic shop with a functional cart.",
+        title: "Ligand binding site predictor for proteins",
+        description: "Launching soon ...",
         link: "#",
-        tags: ["JS", "API"]
-    },
-    {
-        title: "My_project_3",
-        description: "My very first attempt at web design.",
-        link: "#",
-        tags: ["Static"]
+        tags: ["Python"]
     }
 ];
 

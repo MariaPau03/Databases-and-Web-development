@@ -139,3 +139,37 @@ body.light-theme {
     --text-main: #1a1a1a;
     --text-dim: #444444;
 }
+/* Update this in your style.css */
+.tags {
+    display: flex;
+    flex-wrap: wrap; /* Allows tags to move to the next line if they are too long */
+    gap: 12px;       /* This creates the 'comma' space visually without text */
+    margin-top: 10px;
+}
+
+.tags span {
+    background: rgba(157, 78, 221, 0.15); /* Subtle purple tint */
+    border: 1px solid rgba(157, 78, 221, 0.4);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px; /* Makes them pill-shaped */
+    font-size: 0.85rem;
+    white-space: nowrap; /* Prevents a single tag from breaking in half */
+}
+
+/* Update your section styling */
+.section {
+    padding: 100px 0; /* This adds a large gap (100px) above and below each section */
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle line to separate topics */
+}
+
+/* Remove the border for the very first section (About) so it doesn't hit the nav */
+#about {
+    border-top: none;
+    padding-top: 60px; 
+}
+
+/* Add extra space specifically between your bio card and the skills grid */
+.skills-grid {
+    margin-top: 60px; 
+}
