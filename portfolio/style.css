@@ -1,0 +1,323 @@
+/* 1. Global Styles & Variables */
+:root {
+    --bg-color: #0d0d0d;
+    --sidebar-bg: #050505; 
+    --card-bg: #161616;
+    --accent-color: #9d4edd;
+    --accent-glow: rgba(157, 78, 221, 0.3);
+    --text-main: #ffffff;
+    --text-dim: #a0a0a0;
+    --sidebar-width: 280px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    display: flex; /* Creates sidebar side-by-side layout */
+}
+
+/* 2. Sidebar Styling */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--sidebar-bg);
+    position: fixed;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+/* Fix the size of the sidebar photo */
+.nav-avatar, .logo-circle {
+    width: 200px;  /* Fixed size so it's not "enormous" */
+    height: 200px; 
+    margin: 0 auto 15px; /* Center it */
+    border-radius: 50%; /* Perfect circle */
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+}
+
+.logo-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent-color), #5a189a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto 15px;
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.nav-menu ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.nav-menu a:hover {
+    background: rgba(157, 78, 221, 0.1);
+    color: var(--accent-color);
+}
+
+/* 3. Main Content Area */
+.content-area {
+    margin-left: var(--sidebar-width); /* Prevents content from being under sidebar */
+    flex: 1;
+    padding: 60px 8%;
+}
+
+/* 4. The Two-Column About Layout */
+.about-container {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start; /* Keeps text at the top */
+}
+
+/* LEFT SIDE: Big Photo */
+.about-image-side {
+    flex: 0 0 450px; /* Forces specific width for the left column */
+}
+
+.profile-photo-big-left {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* RIGHT SIDE: Text Content */
+.about-text-side {
+    flex: 1;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    background: linear-gradient(to right, #fff, var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+
+/* Update the slideshow/middle image container */
+/* 1. Slideshow Container (The "Window") */
+.slideshow-container {
+    max-width: 400px; /* Controls the overall size of the slideshow */
+    margin: 30px auto; /* Centers the slideshow horizontally */
+    border-radius: 16px;
+    overflow: hidden; /* Hides images that are not currently active */
+    position: relative;
+    background-color: transparent; 
+}
+
+/* 2. The Sliding Track */
+.slideshow-wrapper {
+    display: flex; /* Lines images up side-by-side */
+    transition: transform 1s cubic-bezier(0.45, 0, 0.55, 1); /* Smooth movement effect */
+    width: 100%;
+}
+
+.mySlides {
+    flex: 0 0 100%; /* Each slide matches the container width */
+    position: relative;
+}
+
+.mySlides img {
+    width: 100%;
+    height: auto;
+    max-height: 350px; /* Prevents images from becoming too tall */
+    object-fit: contain; /* Shows the entire image without cutting it */
+    display: block;
+}
+
+/* 3. Captions */
+.text {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+
+.fade {
+    animation: fadeEffect 30s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+/* 6. Cards & Skills (From your original) */
+.card, .skill-card, .project-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 20px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tags span {
+    background: rgba(157, 78, 221, 0.1);
+    border: 1px solid rgba(157, 78, 221, 0.3);
+    color: var(--accent-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* Responsive Logic */
+@media (max-width: 1100px) {
+    body { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; }
+    .content-area { margin-left: 0; padding: 40px 20px; }
+    .about-container { flex-direction: column; align-items: center; }
+    .about-image-side { width: 100%; max-width: 450px; }
+}
+
+/* Roadmap Container */
+.roadmap-container {
+    position: relative;
+    padding-left: 30px; /* Space for the vertical line */
+    margin-top: 20px;
+}
+
+/* The Vertical Line (The Spine) */
+.roadmap-container::before {
+    content: '';
+    position: absolute;
+    left: 7px; /* Centers the line under the dots */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-color), rgba(157, 78, 221, 0.1));
+}
+
+/* Individual Roadmap Item */
+.roadmap-item {
+    position: relative;
+    margin-bottom: 30px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.roadmap-item:hover {
+    transform: translateX(10px); /* Subtle slide effect on hover */
+    border-color: var(--accent-color);
+}
+
+/* The Dots */
+.roadmap-dot {
+    position: absolute;
+    left: -30px; /* Aligns with the vertical line */
+    top: 25px;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-color);
+    border: 3px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Date Styling */
+.roadmap-item .date {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.contact-card {
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none; /* For the LinkedIn link */
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 20px var(--accent-glow);
+}
+
+.contact-card .icon-circle {
+    margin: 0 auto 15px;
+    background: rgba(157, 78, 221, 0.1);
+    color: var(--accent-color);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.copy-hint {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.link-card {
+    display: block; /* Makes the whole card clickable for LinkedIn */
+}
