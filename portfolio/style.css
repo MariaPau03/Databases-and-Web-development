@@ -114,7 +114,7 @@ body {
     margin-right: -8.8%;
     margin-top: -60px; 
     width: calc(100% + 17.6%); 
-    height: 65vh; 
+    height: 80vh; 
     
     background: url('Sports2.jpg') no-repeat center center;
     background-size: cover; 
@@ -193,7 +193,7 @@ body {
 
 .mySlides img {
     width: 100%;
-    height: 350px;
+    height: 500px;
     object-fit: contain;
     background-color: #000;
     display: block;
@@ -284,27 +284,27 @@ body {
 .skills-grid {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the title and the grid below it */
-    gap: 40px;
-    padding: 60px 0;
+    align-items: flex-start; /* Centers the title and the grid below it */
+    gap: 20px; /* Reduced space between title and boxes */
+    padding: 40px 0; /* Reduced vertical padding */
+    width: 100%;
 }
 
 /* Center the Title */
 .grid-title {
-    text-align: center;
-    margin-bottom: 40px;
-    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+    width: auto;
     font-size: 2rem;
 }
 
 /* Center the Row of Cards */
 .skills-container {
-    display: flex;
-    justify-content: center; /* Centers cards horizontally */
-    align-items: stretch;    /* Makes all cards the same height */
-    flex-wrap: wrap;         /* Allows cards to drop to a new line on small screens */
-    gap: 25px;               /* Space between cards */
-    width: 100%;
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+ 
+    gap: 20px;               /* Space between cards */
+    width: 100%;  /* Space of the cards */
 }
 
 /* Fix Card Widths */
@@ -320,13 +320,24 @@ body {
     max-width: 350px;
 }
 
+/* Ensure the container allows tags to wrap to new lines */
+.tags {
+    display: flex;
+    flex-wrap: wrap;    /* This prevents them from being "cut off" */
+    gap: 10px;          /* Adds space between the purple boxes */
+    margin-top: 15px;
+}
+
+/* Improve the look of individual tags */
 .tags span {
     background: rgba(157, 78, 221, 0.1);
     color: var(--accent-color);
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    border: 1px solid rgba(157, 78, 221, 0.2);
+    padding: 6px 14px;  /* Increased horizontal padding for a better pill shape */
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(157, 78, 221, 0.3);
+    white-space: nowrap; /* Keeps the text inside one tag from breaking */
+    display: inline-block;
 }
 
 /* 8. Mobile Responsiveness */
@@ -388,7 +399,7 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 100px; /* This creates a huge gap between About Me, Resume, and Projects */
+    gap: 50px; /* This creates a huge gap between About Me, Resume, and Projects */
 }
 
 /* 2. Add space specifically inside the About Me card */
@@ -455,4 +466,86 @@ body {
 .view-link:hover {
     padding-left: 5px;
     color: #b777e8;
+}
+
+.sidebar-location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin: 10px 0; /* Adds spacing around the location */
+}
+
+.sidebar-location i {
+    color: var(--accent-color); /* Matches your purple theme */
+}
+
+/* Also, add flex-wrap to your tags to fix the cramped purple boxes */
+.tags {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 8px;
+}
+
+.location-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Map is wider than the address card */
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.map-box {
+    border-radius: 16px;
+    overflow: hidden;
+    /* We keep the border to match your other boxes, but remove the filter */
+    border: 1px solid rgba(157, 78, 221, 0.2);
+}
+.map-box iframe {
+    width: 100%;
+    height: 450px;
+    display: block; /* Removes any tiny white space at the bottom */
+}
+
+.address-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+
+.address-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.address-item i {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-top: 4px;
+}
+
+.address-item h4 {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+}
+
+.address-item p {
+    font-size: 1rem;
+    color: var(--text-main);
+    margin: 0;
+}
+
+/* Responsive: Stack them on top of each other on small screens */
+@media (max-width: 768px) {
+    .location-container {
+        grid-template-columns: 1fr;
+    }
 }
