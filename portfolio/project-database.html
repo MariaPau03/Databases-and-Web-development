@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pharmaceutical DB · Maria Pau</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar-ring">
+                <img src="my-photo.jpg" alt="Maria Pau" class="nav-avatar">
+            </div>
+            <h2 class="sidebar-name">Maria Pau</h2>
+            <p class="sidebar-title">Bioinformatician</p>
+            <div class="sidebar-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Barcelona, Spain</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/MariaPau03" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/mariapau-pijoan-manresa" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:mariapau@example.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html#about" class="nav-link"><span class="nav-icon"><i class="fas fa-home"></i></span><span class="nav-label">Home</span></a></li>
+                <li><a href="index.html#about-bio" class="nav-link"><span class="nav-icon"><i class="fas fa-user"></i></span><span class="nav-label">About Me</span></a></li>
+                <li><a href="index.html#resume" class="nav-link"><span class="nav-icon"><i class="fas fa-file-alt"></i></span><span class="nav-label">Resume</span></a></li>
+                <li><a href="index.html#projects" class="nav-link active"><span class="nav-icon"><i class="fas fa-code-branch"></i></span><span class="nav-label">Projects</span></a></li>
+                <li><a href="index.html#contact" class="nav-link"><span class="nav-icon"><i class="fas fa-paper-plane"></i></span><span class="nav-label">Contact</span></a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="theme-toggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></button>
+        </div>
+    </aside>
+
+    <div class="project-page">
+
+        <div class="project-hero">
+            <a href="index.html#projects" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <div class="project-hero-meta">
+                <span class="project-hero-num">Project 03</span>
+                <span class="project-hero-category">Databases &amp; Web Development · Academic</span>
+            </div>
+            <h1>Pharmaceutical Database Design</h1>
+            <p class="project-hero-sub">A normalised relational SQL database for tracking patients, drugs, diseases, drug–drug interactions, and side effects — designed from scratch for the subject Databases &amp; Web Development at UPF-UB.</p>
+            <div class="project-hero-tags">
+                <div class="tags">
+                    <span>MySQL</span><span>SQL</span><span>ER Modelling</span><span>Relational Design</span><span>Flask</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-content">
+
+            <div class="project-section">
+                <h2><i class="fas fa-lightbulb"></i> Overview</h2>
+                <p>This project was developed for the subject <strong>Databases &amp; Web Development</strong> during my Master's at UPF-UB. The task was to design and implement a fully normalised relational database satisfying a set of domain requirements, then expose it through a simple web interface built with Flask.</p>
+                <p>The domain is pharmaceutical: the database stores information about drugs, the diseases they treat, the side effects they can cause, how drugs interact with each other, and which patients are taking what. The design prioritises data integrity, avoiding redundancy, and making complex queries (like "find all drugs that interact with drug X at a severe level") efficient and straightforward.</p>
+            </div>
+
+            <div class="project-section">
+                <h2><i class="fas fa-list-ul"></i> Requirements</h2>
+                <ul>
+                    <li>Track <strong>patients</strong> (Entries) including age, gender, dosage, treatment duration, and improvement score</li>
+                    <li>Store a catalogue of <strong>drugs</strong> with brand name, dosage form, route of administration, and pharmacological class</li>
+                    <li>Record known <strong>drug–drug interactions</strong> with a severity level, linking drug pairs bidirectionally</li>
+                    <li>Associate drugs with the <strong>diseases</strong> they treat through a many-to-many relationship</li>
+                    <li>Log the <strong>side effects</strong> each patient experiences, linked to the drug being taken</li>
+                    <li>Maintain a <strong>users</strong> table for authentication, tied one-to-one to a patient entry</li>
+                </ul>
+            </div>
+
+            <!-- ER Diagram -->
+            <div class="project-section">
+                <h2><i class="fas fa-project-diagram"></i> Entity-Relationship Diagram</h2>
+                <p>The diagram below shows the full ER model. Each box is a table, each line a relationship, and the crow's-foot notation indicates cardinality.</p>
+                <div class="project-image-block">
+                    <img src="data_model.jpg" alt="ER Diagram — Pharmaceutical Database">
+                    <div class="project-image-caption">Entity-Relationship diagram generated with MySQL Workbench</div>
+                </div>
+            </div>
+
+            <!-- Schema logic -->
+            <div class="project-section">
+                <h2><i class="fas fa-sitemap"></i> Logic Behind the Data Model</h2>
+                <p>The schema centres on the <strong>Entries</strong> table, which represents a single patient treatment record. From there, every other entity is reachable. Here is a breakdown of the key design decisions:</p>
+
+                <div class="relations-grid">
+                    <div class="project-info-card">
+                        <h3>M:N — Drugs ↔ Diseases</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">A drug can treat multiple diseases and a disease can be treated by multiple drugs. This is resolved through the <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">Diseases_has_Drugs</code> junction table, which holds the two foreign keys and nothing else — a clean bridge table.</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h3>M:N — Drugs ↔ SideEffects</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">A drug can cause many side effects and the same side effect can be caused by many drugs. The junction table <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">Drugs_has_SideEffects</code> bridges them, keeping the SideEffects table a clean lookup catalogue.</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h3>M:N self-ref — DrugInteractions</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">Interactions are a many-to-many <em>self-join</em> on Drugs. The <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">DrugInteractions</code> table stores pairs (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">idDrugA</code>, <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">idDrugB</code>) plus the severity <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">Level</code>, avoiding duplication of drug data.</p>
+                    </div>
+                    <div class="project-info-card">
+                        <h3>1:1 — Users ↔ Entries</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">Each registered user owns exactly one patient entry. This enforces a clean separation between authentication credentials (email, hashed password) stored in <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">Users</code> and the clinical data stored in <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">Entries</code>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2><i class="fas fa-road"></i> What I Learned</h2>
+                <p>This project taught me how to <strong>think in sets</strong> rather than in objects — the core mindset shift required for relational database design. Identifying the right cardinalities, knowing when to introduce a junction table, and understanding which attributes belong to which entity (rather than duplicating them) are skills that took real iteration to get right.</p>
+                <p>Writing the Flask layer on top also showed me how the schema design directly impacts the complexity of the application code: a well-normalised schema makes JOIN queries clean and predictable, while a poorly designed one leads to messy, fragile queries scattered throughout the codebase.</p>
+            </div>
+
+        </div>
+
+        <div class="project-footer-nav">
+            <a href="project-ligand.html"><i class="fas fa-arrow-left"></i> Previous Project</a>
+            <a href="index.html#projects">All Projects <i class="fas fa-th"></i></a>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

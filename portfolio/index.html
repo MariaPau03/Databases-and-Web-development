@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,279 +8,353 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="site-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-header">
+    <!-- Ambient background orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar-ring">
                 <img src="my-photo.jpg" alt="Maria Pau" class="nav-avatar">
-                <h2>Maria Pau</h2>
-                
-                <div class="sidebar-location">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Barcelona, Spain</span>
-                </div>
+            </div>
+            <h2 class="sidebar-name">Maria Pau</h2>
+            <p class="sidebar-title">Bioinformatician</p>
 
-                <div class="social-links">
-                    <a href="https://github.com/MariaPau03" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/mariapau-pijoan-manresa" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:mppijoan@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-                </div>
+            <div class="sidebar-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Barcelona, Spain</span>
             </div>
 
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#about"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#about-bio"><i class="fas fa-user"></i> About Me</a></li>
-                    <li><a href="#resume"><i class="fas fa-file-alt"></i> Resume</a></li>
-                    <li><a href="#projects"><i class="fas fa-code-branch"></i> Projects</a></li>
-                    <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="sidebar-footer">
-                <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓 Mode</button>
+            <div class="social-links">
+                <a href="https://github.com/MariaPau03" target="_blank" title="GitHub" class="social-btn">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/mariapau-pijoan-manresa" target="_blank" title="LinkedIn" class="social-btn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="/cdn-cgi/l/email-protection#224f43504b4352435762475a434f524e470c414d4f" title="Email" class="social-btn">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-        </aside>
+        </div>
 
-        <main class="content-area">
-            
-            <section id="about" class="hero-full">
-                <div class="overlay"></div> 
-                <div class="hero-text-center">
-                    <h1>Maria Pau</h1>
-                    <p>I'm a <span class="typing-text">Biotechnologist & Bioinformatician student @ UPF-UB</span></p>
-                </div>
-                <div class="scroll-indicator">
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </section>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#about" class="nav-link active"><span class="nav-icon"><i class="fas fa-home"></i></span><span class="nav-label">Home</span></a></li>
+                <li><a href="#about-bio" class="nav-link"><span class="nav-icon"><i class="fas fa-user"></i></span><span class="nav-label">About Me</span></a></li>
+                <li><a href="#resume" class="nav-link"><span class="nav-icon"><i class="fas fa-file-alt"></i></span><span class="nav-label">Resume</span></a></li>
+                <li><a href="#projects" class="nav-link"><span class="nav-icon"><i class="fas fa-code-branch"></i></span><span class="nav-label">Projects</span></a></li>
+                <li><a href="#contact" class="nav-link"><span class="nav-icon"><i class="fas fa-paper-plane"></i></span><span class="nav-label">Contact</span></a></li>
+            </ul>
+        </nav>
 
-            <div class="content-wrapper">
-                
-                <section id="about-bio" class="section">
-                    <div class="card about-bio">
-                        <h1>About Me 👩🏽‍💻</h1>
-                        <p>
-                            I am a <strong>biotechnologist</strong> trained at Universitat de Lleida, with hands-on experience in molecular biology and microbiology. Currently, I am pursuing my Master's at <span>Universitat Pompeu Fabra and Universitat de Barcelona</span> in <strong>Bioinformatics for Health Sciences</strong>.
-                        </p>
-                        <p>My professional curiosity lies at the intersection of <span>structural biology and physics</span>.</p>
-                        
-                        <h2>My interests</h2>
-                        <p>
-                            Curiosity is my default setting. I spend a lot of my time diving into the world of informatics, but I’m just as happy getting lost in a foreign city or obsessed with a chess match.
-                        </p>
-                        
-                        <div class="slideshow-container">
-                            <div class="slideshow-wrapper" id="slide-track">
-                                <div class="mySlides"><img src="BSCs.jpg" alt="BSC"><div class="text">Visiting the BSC! 💻</div></div>
-                                <div class="mySlides"><img src="finland2.jpg" alt="Finland"><div class="text">Exploring new cities 🇫🇮</div></div>
-                                <div class="mySlides"><img src="Sports1.JPG" alt="Trail"><div class="text">Trail Running 🏃🏽‍♀️</div></div>
-                                <div class="mySlides"><img src="Sports3.jpg" alt="10k"><div class="text">10k race in Manresa</div></div>
-                                <div class="mySlides"><img src="class.JPG" alt="Graduation"><div class="text">Graduation day! 🎓</div></div>
-                                <div class="mySlides"><img src="Nature3.jpg" alt="Ordesa"><div class="text">Cascada de la Cola de Caballo </div></div>
-                                <div class="mySlides"><img src="Nature.jpg" alt="Ordesa"><div class="text">Ordesa y Monte Perdido</div></div>
-                                <div class="mySlides"><img src="Natue2.jpg" alt="Mushrooms"><div class="text">Some cute mushrooms 🍄</div></div>
+        <div class="sidebar-footer">
+            <button id="theme-toggle" aria-label="Toggle Light Mode">
+                <i class="fas fa-moon"></i> <span>Dark Mode</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="content-area">
+
+        <!-- HERO -->
+        <section id="about" class="hero-full">
+            <div class="hero-overlay"></div>
+            <div class="hero-text-center">
+                <div class="hero-eyebrow">Biotechnology × Bioinformatics</div>
+                <h1>Maria<br><span class="name-accent">Pau</span></h1>
+                <p class="hero-sub">MSc student @ <span class="highlight-text">UPF-UB</span> · Structural Biology · Machine Learning</p>
+                <div class="hero-cta-row">
+                    <a href="#about-bio" class="cta-primary">Explore my work <i class="fas fa-arrow-right"></i></a>
+                    <a href="./Maria_Pau_Resume.pdf" download class="cta-secondary"><i class="fas fa-download"></i> Resume</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span>scroll</span>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+
+            <!-- ABOUT -->
+            <section id="about-bio" class="section reveal">
+                <div class="section-label">01 — About</div>
+                <h2 class="section-title">Who I Am</h2>
+
+                <div class="about-layout">
+                    <div class="about-text">
+                        <p class="lead-text">I am a <strong>biotechnologist</strong> trained at Universitat de Lleida, with hands-on experience in molecular biology and microbiology.</p>
+                        <p>Currently pursuing my Master's at <strong>Universitat Pompeu Fabra and Universitat de Barcelona</strong> in <strong>Bioinformatics for Health Sciences</strong>. My professional curiosity lies at the intersection of <em>structural biology and physics</em>.</p>
+                        <p>Curiosity is my default setting. I spend a lot of my time diving into the world of informatics, but I'm just as happy getting lost in a foreign city or obsessing over a chess match.</p>
+
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <span class="stat-num">4+</span>
+                                <span class="stat-label">Years Research</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-num">2</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-num">10+</span>
+                                <span class="stat-label">Tools & Languages</span>
                             </div>
                         </div>
                     </div>
 
-                   <div class="skills-grid">
-                        <h2 class="grid-title">Technical skills </h2>
-                        <div class="skills-container">
-                            <div class="skill-card">
-                                <div class="card-header">
-                                    <div class="icon-circle"></div>
-                                    <h4>Languages & Data</h4>
-                                </div>
-                                <div class="tags">
-                                    <span>Python</span><span>NumPy</span><span>Pandas</span><span>PyTorch</span>
-                                </div>
+                    <div class="about-slideshow">
+                        <div class="slideshow-container">
+                            <div class="slideshow-wrapper" id="slide-track">
+                                <div class="mySlides"><img src="BSCs.jpg" alt="BSC"><div class="slide-caption">Visiting the BSC! 💻</div></div>
+                                <div class="mySlides"><img src="finland2.jpg" alt="Finland"><div class="slide-caption">Exploring new cities 🇫🇮</div></div>
+                                <div class="mySlides"><img src="Sports1.JPG" alt="Trail"><div class="slide-caption">Trail Running 🏃🏽‍♀️</div></div>
+                                <div class="mySlides"><img src="Sports3.jpg" alt="10k"><div class="slide-caption">10k race in Manresa</div></div>
+                                <div class="mySlides"><img src="class.JPG" alt="Graduation"><div class="slide-caption">Graduation day! 🎓</div></div>
+                                <div class="mySlides"><img src="Nature3.jpg" alt="Ordesa"><div class="slide-caption">Cascada de la Cola de Caballo</div></div>
+                                <div class="mySlides"><img src="Nature.jpg" alt="Ordesa"><div class="slide-caption">Ordesa y Monte Perdido</div></div>
+                                <div class="mySlides"><img src="Natue2.jpg" alt="Mushrooms"><div class="slide-caption">Some cute mushrooms 🍄</div></div>
                             </div>
-
-                            <div class="skill-card">
-                                <div class="card-header">
-                                    <div class="icon-circle"></div>
-                                    <h4>Structural Biology</h4>
-                                </div>
-                                <div class="tags">
-                                    <span>PyMOL</span><span>AlphaFold</span><span>AutoDock Vina</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-card">
-                                <div class="card-header">
-                                    <div class="icon-circle"></div>
-                                    <h4>Genomics & Sequence Analysis</h4>
-                                </div>
-                                <div class="tags">
-                                    <span>BLAST</span><span>ClustalW</span><span>SAMtools</span><span>BWA</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-card">
-                                <div class="card-header">
-                                    <div class="icon-circle"></div>
-                                    <h4>Data Science & Statistics</h4>
-                                </div>
-                                <div class="tags">
-                                    <span>R</span><span>SQL</span><span>Tidyverse</span>
-                                    <span>ML</span><span>Statistical Hypothesis Testing</span><span>Data visualization(Seaborn, Matplotlib, ggplot2)</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-card">
-                                <div class="card-header">
-                                    <div class="icon-circle"></div>
-                                    <h4>Workflow & HPC</h4>
-                                </div>
-                                <div class="tags">
-                                    <span>Git</span><span>Conda</span><span>HPC</span><span>VS Code</span>
-                                </div>
-                            </div>
-                            <div class="skill-card">
-                                <div class="card-header">
-                                    <div class="icon-circle"></div>
-                                    <h4>Software Engineering & Cloud</h4>
-                                </div>
-                                <div class="tags">
-                                    <span>Docker</span><span>Bash scripting</span>
-                                </div>
-                            </div>
-                        </div> 
+                            <div class="slide-dots" id="slide-dots"></div>
+                        </div>
                     </div>
-                </section> 
+                </div>
+            </section>
 
-                <section id="resume" class="section">
-                    <div class="section-header">
-                        <h2>Resume</h2>
-                        <a href="./Maria_Pau_Resume.pdf" target="_blank" download class="download-btn">
-                            <i class="fas fa-download"></i> Download PDF
-                        </a>
+            <!-- SKILLS -->
+            <section class="section reveal">
+                <div class="section-label">02 — Skills</div>
+                <h2 class="section-title">Technical Expertise</h2>
+                <div class="skills-container">
+
+                    <div class="skill-card">
+                        <div class="skill-card-icon"><i class="fas fa-code"></i></div>
+                        <h4>Languages & Data</h4>
+                        <div class="tags">
+                            <span>Python</span><span>NumPy</span><span>Pandas</span><span>PyTorch</span>
+                        </div>
                     </div>
 
-                    <div class="resume-grid">
-                        <div class="resume-column">
-                            <h3 class="resume-category"><i class="fas fa-graduation-cap"></i> Education</h3>
-                            <div class="roadmap-container">
-                                <div class="resume-item roadmap-item">
-                                    <div class="roadmap-dot"></div>
-                                    <span class="date">2025 - Present</span>
+                    <div class="skill-card">
+                        <div class="skill-card-icon"><i class="fas fa-atom"></i></div>
+                        <h4>Structural Biology</h4>
+                        <div class="tags">
+                            <span>PyMOL</span><span>AlphaFold</span><span>AutoDock Vina</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-icon"><i class="fas fa-dna"></i></div>
+                        <h4>Genomics & Sequence</h4>
+                        <div class="tags">
+                            <span>BLAST</span><span>ClustalW</span><span>SAMtools</span><span>BWA</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-icon"><i class="fas fa-chart-bar"></i></div>
+                        <h4>Data Science & Stats</h4>
+                        <div class="tags">
+                            <span>R</span><span>SQL</span><span>Tidyverse</span><span>ML</span><span>Seaborn</span><span>ggplot2</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-icon"><i class="fas fa-server"></i></div>
+                        <h4>Workflow & HPC</h4>
+                        <div class="tags">
+                            <span>Git</span><span>Conda</span><span>HPC</span><span>VS Code</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-icon"><i class="fas fa-cloud"></i></div>
+                        <h4>Engineering & Cloud</h4>
+                        <div class="tags">
+                            <span>Flask</span><span>MySQL</span><span>Docker</span><span>Linux</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- RESUME -->
+            <section id="resume" class="section reveal">
+                <div class="section-label">03 — Experience</div>
+                <div class="section-header-row">
+                    <h2 class="section-title">Resume</h2>
+                    <a href="./Maria_Pau_Resume.pdf" target="_blank" download class="download-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+
+                <div class="resume-grid">
+                    <div class="resume-column">
+                        <h3 class="resume-category"><i class="fas fa-graduation-cap"></i> Education</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">2025 — Present</span>
                                     <h4>MSc in Bioinformatics for Health Sciences</h4>
-                                    <p>Universitat Pompeu Fabra & Universitat de Lleida</p>
+                                    <p>Universitat Pompeu Fabra & Universitat de Barcelona</p>
                                 </div>
-                                <div class="resume-item roadmap-item">
-                                    <div class="roadmap-dot"></div>
-                                    <span class="date">2021 - 2025</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">2021 — 2025</span>
                                     <h4>BSc in Biotechnology</h4>
                                     <p>Universitat de Lleida</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="resume-column">
-                            <h3 class="resume-category"><i class="fas fa-briefcase"></i> Experience</h3>
-                            <div class="roadmap-container">
-                                <div class="resume-item roadmap-item">
-                                    <div class="roadmap-dot"></div>
-                                    <span class="date">Feb 2025 - Aug 2025</span>
+                    <div class="resume-column">
+                        <h3 class="resume-category"><i class="fas fa-briefcase"></i> Experience</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">Feb 2025 — Aug 2025</span>
                                     <h4>Undergraduate Research Fellow</h4>
-                                    <p>Collaboration Fellowship | Ministry of Education & IRB Lleida</p>
+                                    <p>Ministry of Education & IRB Lleida</p>
                                 </div>
-                                <div class="resume-item roadmap-item">
-                                    <div class="roadmap-dot"></div>
-                                    <span class="date">Jun 2024 - Aug 2024</span>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">Jun 2024 — Aug 2024</span>
                                     <h4>Undergraduate Scientific Researcher</h4>
-                                    <p>Cell Cycle Laboratory, IRB Lleida (Cyclin D1 study).</p>
+                                    <p>Cell Cycle Laboratory, IRB Lleida · Cyclin D1 study</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <section id="projects" class="section">
-                    <div class="section-header">
-                        <h2>Featured Projects</h2>
-                    </div>
-                    
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3>RXINSIGHT</h3>
-                            <p>Patient-centered web application designed to bridge the gap between complex pharmaceutical data.</p>
+            <!-- PROJECTS -->
+            <section id="projects" class="section reveal">
+                <div class="section-label">04 — Work</div>
+                <h2 class="section-title">Featured Projects</h2>
+
+                <div class="project-grid">
+                    <a href="project-rxinsight.html" class="project-card project-card--link">
+                        <div class="project-number">01</div>
+                        <div class="project-body">
+                            <h3>RxInsight</h3>
+                            <p>Patient-centered web application bridging the gap between complex pharmaceutical data and everyday users.</p>
                             <div class="tags">
                                 <span>Python</span><span>Flask</span><span>MySQL</span>
                             </div>
-                            <a href="#" class="view-link">View Project →</a>
                         </div>
+                        <span class="project-link">View Project <i class="fas fa-arrow-right"></i></span>
+                    </a>
 
-                        <div class="project-card">
-                            <h3>Ligand binding site predictor</h3>
-                            <p>Predictive modeling for protein binding sites. Utilizing deep learning frameworks to identify potential interaction pockets.</p>
+                    <a href="project-ligand.html" class="project-card project-card--link">
+                        <div class="project-number">02</div>
+                        <div class="project-body">
+                            <h3>Ligand Binding Site Predictor</h3>
+                            <p>Deep learning framework for predictive modeling of protein binding sites from 3D protein structures.</p>
                             <div class="tags">
                                 <span>Python</span><span>PyTorch</span><span>BioPython</span>
                             </div>
-                            <a href="#" class="view-link">View Project →</a>
                         </div>
-                    </div>
-                </section>
+                        <span class="project-link project-soon">Launching Soon <i class="fas fa-clock"></i></span>
+                    </a>
 
-                <section id="contact" class="section">
-                    <div class="section-header">
-                        <h2>Get in Touch 📩</h2>
-                        <p>I'm always open to discussing new projects or opportunities.</p>
-                    </div>
-
-                    <div class="contact-grid">
-                        <div class="card contact-card" onclick="copyEmail()" id="copy-card">
-                            <div class="icon-circle"><i class="fas fa-envelope"></i></div>
-                            <h3>Email Me</h3>
-                            <p id="email-address">mppijoan@gmail.com</p>
-                            <span class="copy-hint">Click to copy</span>
+                    <a href="project-database.html" class="project-card project-card--link">
+                        <div class="project-number">03</div>
+                        <div class="project-body">
+                            <h3>Pharmaceutical Database Design</h3>
+                            <p>Relational SQL database for tracking patients, drugs, diseases, interactions and side effects. Academic project for Databases &amp; Web Development.</p>
+                            <div class="tags">
+                                <span>MySQL</span><span>SQL</span><span>ER Modelling</span><span>Flask</span>
+                            </div>
                         </div>
-
-                        <a href="https://linkedin.com/in/mariapau-pijoan-manresa" target="_blank" class="card contact-card link-card">
-                            <div class="icon-circle"><i class="fab fa-linkedin"></i></div>
-                            <h3>LinkedIn</h3>
-                            <p>Connect with me professionally</p>
-                        </a>
-                    </div>
-                </section>
-
-                <footer class="footer">
-                    <p>&copy; 2026 Maria Pau. Built with ❤️</p>
-                </footer>
-            
-            <section id="location" class="section">
-                <div class="section-header">
-                    <h2>Location</h2>
+                        <span class="project-link">View Project <i class="fas fa-arrow-right"></i></span>
+                    </a>
                 </div>
-                
+            </section>
+
+            <!-- CONTACT -->
+            <section id="contact" class="section reveal">
+                <div class="section-label">05 — Connect</div>
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-sub">I'm always open to discussing research, new projects, or opportunities.</p>
+
+                <div class="contact-grid">
+                    <div class="contact-card" onclick="copyEmail()" id="copy-card" style="cursor:pointer;">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <h3>Email</h3>
+                        <p id="email-address"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92fff3e0fbf3e2f3e7bce2fbf8fdf3fcd2f5fff3fbfebcf1fdff">[email&#160;protected]</a></p>
+                        <span class="copy-hint"><i class="fas fa-copy"></i> Click to copy</span>
+                    </div>
+
+                    <a href="https://linkedin.com/in/mariapau-pijoan-manresa" target="_blank" class="contact-card">
+                        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                        <h3>LinkedIn</h3>
+                        <p>Connect professionally</p>
+                        <span class="copy-hint"><i class="fas fa-external-link-alt"></i> Open LinkedIn</span>
+                    </a>
+
+                    <a href="https://github.com/MariaPau03" target="_blank" class="contact-card">
+                        <div class="contact-icon"><i class="fab fa-github"></i></div>
+                        <h3>GitHub</h3>
+                        <p>See my code & projects</p>
+                        <span class="copy-hint"><i class="fas fa-external-link-alt"></i> Open GitHub</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- LOCATION -->
+            <section id="location" class="section reveal">
+                <div class="section-label">06 — Location</div>
+                <h2 class="section-title">Based in Barcelona</h2>
+
                 <div class="location-container">
                     <div class="map-box">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5987.055779157803!2d2.193996500000005!3d41.38434090000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a3066fae4383%3A0x3eaa5510860b1d90!2sCampus%20Universitari%20Mar!5e0!3m2!1sca!2ses!4v1771239968790!5m2!1sca!2ses" 
-                            width="100%" 
-                            height="450" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5987.055779157803!2d2.193996500000005!3d41.38434090000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a3066fae4383%3A0x3eaa5510860b1d90!2sCampus%20Universitari%20Mar!5e0!3m2!1sca!2ses!4v1771239968790!5m2!1sca!2ses"
+                            width="100%"
+                            height="400"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
 
                     <div class="address-card">
                         <div class="address-item">
-                            <i class="fas fa-road"></i>
+                            <i class="fas fa-university"></i>
                             <div>
-                                <h4>Street</h4>
-                                <p>Carrer del Doctor Aiguader, 80, Ciutat Vella</p>
+                                <h4>Campus</h4>
+                                <p>Campus Mar, UPF</p>
+                            </div>
+                        </div>
+                        <div class="address-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Carrer del Doctor Aiguader, 80</p>
                             </div>
                         </div>
                         <div class="address-item">
                             <i class="fas fa-city"></i>
                             <div>
-                                <h4>City & Province</h4>
+                                <h4>City</h4>
                                 <p>08003 Barcelona, Catalonia</p>
                             </div>
                         </div>
@@ -288,18 +362,19 @@
                             <i class="fas fa-globe-europe"></i>
                             <div>
                                 <h4>Country</h4>
-                                <p>Spain</p>
+                                <p>Spain 🇪🇸</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            </div> 
-        </main>
-    </div>
+            <footer class="footer">
+                <p>© 2026 <strong>Maria Pau</strong> · Designed &amp; built with care</p>
+            </footer>
 
-    <button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+        </div><!-- end content-wrapper -->
+    </main>
 
     <script src="script.js"></script>
 </body>

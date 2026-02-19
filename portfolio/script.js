@@ -1,84 +1,130 @@
+// =============================================
+// MARIA PAU — Portfolio Script
+// =============================================
+
 // 1. Theme Toggle
 const toggleBtn = document.getElementById('theme-toggle');
+const themeIcon = toggleBtn?.querySelector('i');
+const themeLabel = toggleBtn?.querySelector('span');
+
 if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        if (themeIcon) themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+        if (themeLabel) themeLabel.textContent = isLight ? 'Light Mode' : 'Dark Mode';
     });
 }
 
-// 2. Project Data & Loading
-const myProjects = [
-    {
-        title: "RXINSIGHT",
-        description: "Patient-centered web application designed to bridge the gap between complex pharmaceutical data.",
-        link: "#",
-        tags: ["Python", "Flask", "MySQL"]
-    },
-    {
-        title: "Ligand binding site predictor",
-        description: "Predictive modeling for protein binding sites. Launching soon...",
-        link: "#",
-        tags: ["Python", "PyTorch"]
-    }
-];
-
-const projectGrid = document.querySelector('.project-grid');
-
-function loadProjects() {
-    if(!projectGrid) return;
-    projectGrid.innerHTML = myProjects.map(project => `
-        <div class="project-card">
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
-            <div class="tags">${project.tags.map(t => `<span>${t}</span>`).join('')}</div>
-            <a href="${project.link}" style="color: var(--accent-color); text-decoration: none; margin-top: 10px; display: inline-block;">View Project →</a>
-        </div>
-    `).join('');
-}
-
-// 3. Smooth Sliding Slideshow (ONLY THIS ONE)
+// 2. Slideshow with dots
 let currentSlide = 0;
+let slideshowTimer;
 
-function moveSlides() {
+function initSlideshow() {
     const track = document.getElementById('slide-track');
     const slides = document.querySelectorAll('.mySlides');
-    
+    const dotsContainer = document.getElementById('slide-dots');
+
     if (!track || slides.length === 0) return;
 
-    currentSlide++;
+    // Create dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer?.appendChild(dot);
+    });
 
-    // If we are at the end, go back to the first slide
-    if (currentSlide >= slides.length) {
-        currentSlide = 0;
+    function goToSlide(index) {
+        currentSlide = index;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.dot').forEach((d, i) => {
+            d.classList.toggle('active', i === currentSlide);
+        });
+        // Reset timer
+        clearInterval(slideshowTimer);
+        slideshowTimer = setInterval(nextSlide, 8000);
     }
 
-    // Move the track to the left
-    const percentage = currentSlide * 100;
-    track.style.transform = `translateX(-${percentage}%)`;
+    function nextSlide() {
+        goToSlide((currentSlide + 1) % slides.length);
+    }
+
+    slideshowTimer = setInterval(nextSlide, 8000);
 }
 
-// 4. Initialize everything when the page is ready
-window.addEventListener('DOMContentLoaded', () => {
-    loadProjects();
-    // Start the sliding timer (3 seconds)
-    setInterval(moveSlides, 8000);
-});
+// 3. Scroll Reveal
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// 4. Active nav link on scroll
+function initNavHighlight() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href').replace('#', '');
+                    link.classList.toggle('active', href === id);
+                });
+            }
+        });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => observer.observe(s));
+}
+
+// 5. Copy email
 function copyEmail() {
-    const email = document.getElementById("email-address").innerText;
-    
+    const emailEl = document.getElementById('email-address');
+    const hint = document.querySelector('.copy-hint');
+    if (!emailEl || !hint) return;
+
+    const email = emailEl.innerText.trim();
     navigator.clipboard.writeText(email).then(() => {
-        // Find the copy hint text and change it temporarily
-        const hint = document.querySelector('.copy-hint');
-        const originalText = hint.innerText;
-        
-        hint.innerText = "Copied! ✅";
-        hint.style.color = "#4CAF50"; // Green for success
-        
+        hint.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        hint.style.color = '#4fc4cf';
         setTimeout(() => {
-            hint.innerText = originalText;
-            hint.style.color = "var(--accent-color)";
-        }, 2000);
-    }).catch(err => {
-        console.error('Could not copy text: ', err);
+            hint.innerHTML = '<i class="fas fa-copy"></i> Click to copy';
+            hint.style.color = '';
+        }, 2500);
+    }).catch(() => {
+        // Fallback
+        const temp = document.createElement('textarea');
+        temp.value = email;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
     });
 }
+
+// 6. Subtle parallax on hero
+function initParallax() {
+    const hero = document.querySelector('.hero-full');
+    if (!hero) return;
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        hero.style.backgroundPositionY = `calc(50% + ${y * 0.3}px)`;
+    }, { passive: true });
+}
+
+// Init
+window.addEventListener('DOMContentLoaded', () => {
+    initSlideshow();
+    initScrollReveal();
+    initNavHighlight();
+    initParallax();
+});
