@@ -1363,3 +1363,68 @@ body {
     .project-card--link { grid-template-columns: auto 1fr; }
     .project-card--link .project-link { display: none; }
 }
+
+/* =============================================
+   LAUNCH APP BUTTON & LIVE BADGE
+============================================= */
+.project-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.launch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+    box-shadow: 0 4px 20px var(--accent-glow);
+}
+.launch-btn:hover {
+    background: #9580ff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+}
+.launch-btn i {
+    font-size: 0.85rem;
+}
+
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(79, 196, 207, 0.1);
+    border: 1px solid rgba(79, 196, 207, 0.35);
+    color: var(--accent-2);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    animation: livePulse 1.8s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(79,196,207,0.5); }
+    50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 5px rgba(79,196,207,0); }
+}
