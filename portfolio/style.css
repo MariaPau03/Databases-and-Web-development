@@ -419,10 +419,9 @@ body {
 
 /* 8. About Layout */
 .about-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
 }
 
 .about-text .lead-text {
@@ -1365,6 +1364,232 @@ body {
 }
 
 /* =============================================
+   CLINICAL DB PROJECT — Schema tables & groups
+============================================= */
+.db-group-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 8px 0 14px;
+    border-bottom: 1px solid rgba(124,106,247,0.2);
+    margin: 32px 0 16px;
+}
+
+.schema-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 0.8rem;
+}
+.schema-table tr {
+    border-bottom: 1px solid var(--card-border);
+    transition: background var(--transition);
+}
+.schema-table tr:last-child { border-bottom: none; }
+.schema-table tr:hover { background: rgba(124,106,247,0.05); }
+.schema-table td {
+    padding: 6px 8px;
+    vertical-align: top;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+.schema-table td:first-child {
+    width: 22px;
+    text-align: center;
+    font-size: 0.75rem;
+    padding-right: 2px;
+}
+.schema-table td:nth-child(2) {
+    width: 160px;
+    white-space: nowrap;
+}
+.schema-table td:nth-child(2) code {
+    background: rgba(124,106,247,0.1);
+    color: var(--accent-2);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+}
+.schema-table td:nth-child(3) { color: var(--text-dim); }
+.col-pk { color: #f5a623; }
+.col-fk { color: #e05c5c; }
+
+.gdpr-note {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(79,196,207,0.07);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.8rem;
+    color: var(--accent-2);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+}
+.gdpr-note i { margin-top: 2px; flex-shrink: 0; }
+.gdpr-note code {
+    background: rgba(79,196,207,0.12);
+    color: var(--accent-2);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+/* Make relations-grid full-width on clinical page if needed */
+.project-info-card[style*="grid-column"] {
+    grid-column: 1 / -1;
+}
+
+
+/* =============================================
+   PHOTO GALLERY — Portrait & Landscape groups
+============================================= */
+
+.photo-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+.gallery-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Divider label */
+.gallery-group-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+.gallery-group-line {
+    flex: 1;
+    height: 1px;
+    background: var(--card-border);
+}
+
+/* ── Portrait row: 5 tall cards side by side ── */
+.gallery-row--portrait {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.gallery-row--portrait .gallery-item {
+    height: 320px;
+}
+
+.gallery-row--portrait .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* ── Landscape row: 3 wide cards ── */
+.gallery-row--landscape {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.gallery-row--landscape .gallery-item {
+    height: 200px;
+}
+
+.gallery-row--landscape .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+}
+
+/* ── Shared card styles ── */
+.gallery-item {
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.35s cubic-bezier(0.4,0,0.2,1),
+                border-color 0.35s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(124,106,247,0.5);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,106,247,0.2);
+    z-index: 2;
+}
+
+/* Caption slides up on hover */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 12px 10px;
+    background: linear-gradient(to top, rgba(5,8,12,0.92) 0%, transparent 100%);
+    color: #fff;
+    font-size: 0.76rem;
+    transform: translateY(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Light theme */
+.light-theme .gallery-item { border-color: rgba(0,0,0,0.08); }
+.light-theme .gallery-item:hover { border-color: rgba(124,106,247,0.4); }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .gallery-row--portrait {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .gallery-row--portrait .gallery-item { height: 260px; }
+    .gallery-row--landscape {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery-row--landscape .gallery-item { height: 180px; }
+}
+
+@media (max-width: 540px) {
+    .gallery-row--portrait {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    .gallery-row--portrait .gallery-item { height: 200px; }
+    .gallery-row--landscape {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .gallery-row--landscape .gallery-item { height: 200px; }
+}
+
+/* Hide old slideshow wrapper — replaced by gallery */
+.about-slideshow { display: none; }
+
+/* =============================================
    LAUNCH APP BUTTON & LIVE BADGE
 ============================================= */
 .project-hero-actions {
@@ -1388,24 +1613,22 @@ body {
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    transition: var(--transition);
-    box-shadow: 0 4px 20px var(--accent-glow);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(124,106,247,0.35);
 }
 .launch-btn:hover {
     background: #9580ff;
     transform: translateY(-3px);
-    box-shadow: 0 8px 30px var(--accent-glow);
+    box-shadow: 0 8px 30px rgba(124,106,247,0.5);
 }
-.launch-btn i {
-    font-size: 0.85rem;
-}
+.launch-btn i { font-size: 0.85rem; }
 
 .live-badge {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    background: rgba(79, 196, 207, 0.1);
-    border: 1px solid rgba(79, 196, 207, 0.35);
+    background: rgba(79,196,207,0.1);
+    border: 1px solid rgba(79,196,207,0.35);
     color: var(--accent-2);
     padding: 8px 16px;
     border-radius: 100px;
@@ -1420,11 +1643,11 @@ body {
     height: 7px;
     background: var(--accent-2);
     border-radius: 50%;
-    animation: livePulse 1.8s ease-in-out infinite;
     flex-shrink: 0;
+    animation: livePulse 1.8s ease-in-out infinite;
 }
 
 @keyframes livePulse {
     0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(79,196,207,0.5); }
-    50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 5px rgba(79,196,207,0); }
+    50%       { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 5px rgba(79,196,207,0); }
 }

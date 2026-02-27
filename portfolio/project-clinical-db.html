@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clinical Trials DB · Maria Pau</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar-ring">
+                <img src="my-photo.jpg" alt="Maria Pau" class="nav-avatar">
+            </div>
+            <h2 class="sidebar-name">Maria Pau</h2>
+            <p class="sidebar-title">Bioinformatician</p>
+            <div class="sidebar-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Barcelona, Spain</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/MariaPau03" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/mariapau-pijoan-manresa" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                <a href="/cdn-cgi/l/email-protection#e28f83908b83928397cc928b888d838ca2858f838b8ecc818d8f" class="social-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html#about" class="nav-link"><span class="nav-icon"><i class="fas fa-home"></i></span><span class="nav-label">Home</span></a></li>
+                <li><a href="index.html#about-bio" class="nav-link"><span class="nav-icon"><i class="fas fa-user"></i></span><span class="nav-label">About Me</span></a></li>
+                <li><a href="index.html#resume" class="nav-link"><span class="nav-icon"><i class="fas fa-file-alt"></i></span><span class="nav-label">Resume</span></a></li>
+                <li><a href="index.html#projects" class="nav-link active"><span class="nav-icon"><i class="fas fa-code-branch"></i></span><span class="nav-label">Projects</span></a></li>
+                <li><a href="index.html#contact" class="nav-link"><span class="nav-icon"><i class="fas fa-paper-plane"></i></span><span class="nav-label">Contact</span></a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="theme-toggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></button>
+        </div>
+    </aside>
+
+    <div class="project-page">
+
+        <!-- ── Hero ── -->
+        <div class="project-hero">
+            <a href="index.html#projects" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <div class="project-hero-meta">
+                <span class="project-hero-num">Project 05</span>
+                <span class="project-hero-category">Clinical Informatics · Relational DB Design · GDPR</span>
+            </div>
+            <h1>Clinical Trials Database</h1>
+            <p class="project-hero-sub">A production-grade relational data model for managing hospital clinical trials — built around pseudonymised participants, longitudinal visit data, flexible per-study variables, file assets, and a GDPR-compliant identity separation architecture.</p>
+            <div class="project-hero-tags">
+                <div class="tags">
+                    <span>MySQL</span><span>ER Modelling</span><span>Clinical Data</span><span>GDPR</span><span>Normalisation</span><span>Relational Design</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Content ── -->
+        <div class="project-content">
+
+            <!-- Purpose -->
+            <div class="project-section">
+                <h2><i class="fas fa-hospital"></i> Purpose & Context</h2>
+                <p>This data model was designed for the role of <strong>manager of a hospital clinical trials support service</strong>. The challenge was to build a single database that could serve <em>multiple simultaneous clinical studies</em>, each with its own set of measured variables, participant lists, and data-collection schedules — while meeting strict legal and ethical requirements around patient identity protection.</p>
+                <p>Real clinical trial databases face a fundamental tension: they need to be flexible enough to accommodate completely different studies (a cardiology trial measuring blood pressure over 12 visits looks very different from an oncology trial collecting tumour imaging files at three time points), yet structured enough to guarantee data integrity, auditability, and GDPR compliance. This schema resolves that tension through a combination of a <strong>dynamic variable system</strong>, a <strong>visit-based longitudinal structure</strong>, and an <strong>external identity-link table</strong> stored in a separate database.</p>
+            </div>
+
+            <!-- ER Diagram -->
+            <div class="project-section">
+                <h2><i class="fas fa-project-diagram"></i> Entity-Relationship Diagram</h2>
+                <p>The diagram below shows the full schema. Solid lines represent identifying relationships; dashed lines represent non-identifying ones. Crow's-foot notation indicates cardinality at each end.</p>
+                <div class="project-image-block">
+                    <img src="data_model_clinical.png" alt="ER Diagram — Clinical Trials Database">
+                    <div class="project-image-caption">Entity-Relationship diagram generated with MySQL Workbench · 12 tables · 2 database scopes</div>
+                </div>
+            </div>
+
+            <!-- Table breakdown -->
+            <div class="project-section">
+                <h2><i class="fas fa-table"></i> Table-by-Table Breakdown</h2>
+                <p>The schema is composed of 12 tables organised into four logical groups: <strong>study management</strong>, <strong>participants & visits</strong>, <strong>clinical data</strong>, and <strong>users & access control</strong>. Each is explained below.</p>
+
+                <!-- Study management group -->
+                <div class="db-group-label">Study Management</div>
+                <div class="relations-grid" style="margin-bottom: 28px;">
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-flask" style="color:var(--accent);margin-right:6px;"></i> STUDY</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            The central anchor of the schema. Every other entity ultimately traces back to a study.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>study_id</code></td><td>Primary key (INT, auto-increment)</td></tr>
+                            <tr><td></td><td><code>study_code</code></td><td>Short human-readable identifier (e.g. "CARDIO-2024")</td></tr>
+                            <tr><td></td><td><code>name</code></td><td>Full study title</td></tr>
+                            <tr><td></td><td><code>description</code></td><td>Objectives and protocol summary</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>LAB_lab_id</code></td><td>FK → LAB. The lab responsible for this study</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>CONTACT_contact_id</code></td><td>FK → CONTACT. The principal investigator / contact person</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-microscope" style="color:var(--accent);margin-right:6px;"></i> LAB</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Represents the hospital laboratory or research unit responsible for running one or more studies.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>lab_id</code></td><td>Primary key</td></tr>
+                            <tr><td></td><td><code>name</code></td><td>Lab name</td></tr>
+                            <tr><td></td><td><code>department</code></td><td>Hospital department</td></tr>
+                            <tr><td></td><td><code>email</code></td><td>Lab contact email</td></tr>
+                            <tr><td></td><td><code>phone</code></td><td>Lab contact phone</td></tr>
+                        </table>
+                        <p style="color:var(--text-dim);font-size:0.82rem;margin-top:10px;">One lab can run many studies (1:N with STUDY).</p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-address-card" style="color:var(--accent);margin-right:6px;"></i> CONTACT</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            The principal investigator or designated contact for a study — kept separate from LAB to allow different people to be responsible for different studies within the same lab.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>contact_id</code></td><td>Primary key</td></tr>
+                            <tr><td></td><td><code>name</code></td><td>Full name</td></tr>
+                            <tr><td></td><td><code>email</code></td><td>Contact email</td></tr>
+                            <tr><td></td><td><code>phone</code></td><td>Contact phone</td></tr>
+                            <tr><td></td><td><code>organization</code></td><td>Affiliated institution</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-sliders-h" style="color:var(--accent);margin-right:6px;"></i> VARIABLE</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            A catalogue of all possible clinical data items (e.g. "systolic_bp", "tumour_volume", "haemoglobin"). The label of stored data is not static — it comes from this table, making the schema flexible across completely different study types.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>variable_id</code></td><td>Primary key</td></tr>
+                            <tr><td></td><td><code>code</code></td><td>Machine-readable key (e.g. "sbp")</td></tr>
+                            <tr><td></td><td><code>display_name</code></td><td>Human-readable label</td></tr>
+                            <tr><td></td><td><code>data_kind</code></td><td>"numeric", "text", "file" — determines which child table stores it</td></tr>
+                            <tr><td></td><td><code>unit</code></td><td>Physical unit if applicable (e.g. "mmHg", "kg")</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="project-info-card" style="grid-column: 1 / -1;">
+                        <h3><i class="fas fa-link" style="color:var(--accent);margin-right:6px;"></i> STUDY_VARIABLE &nbsp;<span style="font-size:0.72rem;font-weight:400;color:var(--text-dim);letter-spacing:0.05em;">junction table</span></h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Bridges STUDY and VARIABLE in a many-to-many relationship: a study uses many variables, and the same variable (e.g. "age") can appear in many studies. This is where the metadata about <em>how</em> a variable is used in a specific study is stored.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>study_id</code></td><td>Composite PK + FK → STUDY</td></tr>
+                            <tr><td class="col-pk">🔑</td><td><code>variable_id</code></td><td>Composite PK + FK → VARIABLE</td></tr>
+                            <tr><td></td><td><code>is_longitudinal</code></td><td>Whether this variable is collected at every visit or just once at enrolment</td></tr>
+                            <tr><td></td><td><code>is_required</code></td><td>Whether this field is mandatory for data entry in this study</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Participants & visits group -->
+                <div class="db-group-label">Participants &amp; Visits</div>
+                <div class="relations-grid" style="margin-bottom: 28px;">
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-user-shield" style="color:var(--accent);margin-right:6px;"></i> PARTICIPANT</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Stores pseudonymised participant records. There is <strong>no name, date of birth, or national ID</strong> in this table — only a system-generated code. The link to real patient identity is stored in a completely separate database (IDENTITY_LINK), as required by GDPR and clinical trial regulations.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>participant_id</code></td><td>Auto-generated surrogate primary key</td></tr>
+                            <tr><td></td><td><code>participant_code</code></td><td>Study-specific pseudonymous code (e.g. "PT-0042")</td></tr>
+                            <tr><td></td><td><code>enrollment_date</code></td><td>Date the participant joined the study</td></tr>
+                            <tr><td></td><td><code>status</code></td><td>"active", "withdrawn", "completed"</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>STUDY_study_id</code></td><td>FK → STUDY. Which study this participant belongs to</td></tr>
+                        </table>
+                        <div class="gdpr-note"><i class="fas fa-lock"></i> Identity separation: the <code>participant_code</code> is the only link to the IDENTITY_LINK table stored in an external DB.</div>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-calendar-check" style="color:var(--accent);margin-right:6px;"></i> VISIT</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Models the longitudinal structure of clinical trials. Each row is one hospital visit by one participant. Clinical observations and file assets are always attached to a visit, ensuring all data is time-stamped and traceable.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>visit_id</code></td><td>Primary key</td></tr>
+                            <tr><td></td><td><code>visit_date</code></td><td>Date of the visit</td></tr>
+                            <tr><td></td><td><code>visit_label</code></td><td>Protocol label (e.g. "Baseline", "Month 3", "Follow-up")</td></tr>
+                            <tr><td></td><td><code>visit_number</code></td><td>Sequential number within the study protocol</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>PARTICIPANT_participant_id</code></td><td>FK → PARTICIPANT. Who attended this visit</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Clinical data group -->
+                <div class="db-group-label">Clinical Data</div>
+                <div class="relations-grid" style="margin-bottom: 28px;">
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-chart-line" style="color:var(--accent);margin-right:6px;"></i> OBSERVATION</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Stores scalar clinical measurements — a single numeric or text value for a given variable at a given visit. This table is the main store for structured clinical data (blood pressure, lab results, survey scores, etc.).
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>observation_id</code></td><td>Primary key</td></tr>
+                            <tr><td></td><td><code>observed_at</code></td><td>Exact timestamp of measurement</td></tr>
+                            <tr><td></td><td><code>value</code></td><td>The measured value (stored as VARCHAR; type is governed by VARIABLE.data_kind)</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>VISIT_visit_id</code></td><td>FK → VISIT. When and for whom this was measured</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>VARIABLE_variable_id</code></td><td>FK → VARIABLE. What was measured</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-file-medical" style="color:var(--accent);margin-right:6px;"></i> FILE_ASSET</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Handles binary clinical data — MRI images, genomic sequencing files, ECG recordings, etc. Files are not stored in the database itself; instead, this table stores a URI pointing to the file in an object store or file system.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>file_id</code></td><td>Primary key (UUID or auto-increment)</td></tr>
+                            <tr><td></td><td><code>storage_uri</code></td><td>Path or URL to the file in external storage</td></tr>
+                            <tr><td></td><td><code>file_name</code></td><td>Original filename for display</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>VISIT_visit_id</code></td><td>FK → VISIT. Which visit produced this file</td></tr>
+                            <tr><td class="col-fk">🔗</td><td><code>VARIABLE_variable_id</code></td><td>FK → VARIABLE. What type of data this file represents</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Users & access group -->
+                <div class="db-group-label">Users &amp; Access Control</div>
+                <div class="relations-grid" style="margin-bottom: 0;">
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-user-cog" style="color:var(--accent);margin-right:6px;"></i> app_user</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Application users — the people who log in to enter or review data. Kept entirely separate from clinical participants to avoid any data confusion.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>user_id</code></td><td>Primary key</td></tr>
+                            <tr><td></td><td><code>email</code></td><td>Login identifier (unique)</td></tr>
+                            <tr><td></td><td><code>full_name</code></td><td>Display name</td></tr>
+                            <tr><td></td><td><code>is_active</code></td><td>Soft-delete / deactivation flag</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-id-badge" style="color:var(--accent);margin-right:6px;"></i> ROLE</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Defines the permission levels in the system. Three roles were specified: <strong>General Admin</strong> (full access), <strong>Supervisor</strong> (read all, approve entries), and <strong>Data Entry</strong> (write access to their assigned studies only).
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>role_id</code></td><td>Primary key</td></tr>
+                            <tr><td></td><td><code>role_name</code></td><td>"admin", "supervisor", "data_entry"</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-users-cog" style="color:var(--accent);margin-right:6px;"></i> app_user_has_ROLE &nbsp;<span style="font-size:0.72rem;font-weight:400;color:var(--text-dim);">junction</span></h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Many-to-many bridge between users and roles. A user can hold multiple roles (e.g. admin of one study, supervisor of another).
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>app_user_user_id</code></td><td>Composite PK + FK → app_user</td></tr>
+                            <tr><td class="col-pk">🔑</td><td><code>ROLE_role_id</code></td><td>Composite PK + FK → ROLE</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3><i class="fas fa-key" style="color:var(--accent);margin-right:6px;"></i> USER_STUDY_ACCESS</h3>
+                        <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
+                            Controls which users can access which studies, and at what permission level. This allows a data-entry user to be restricted to exactly the studies they are responsible for, while admins have global access.
+                        </p>
+                        <table class="schema-table">
+                            <tr><td class="col-pk">🔑</td><td><code>user_id</code></td><td>Composite PK + FK → app_user</td></tr>
+                            <tr><td class="col-pk">🔑</td><td><code>stuy_id</code></td><td>Composite PK + FK → STUDY</td></tr>
+                            <tr><td></td><td><code>access_level</code></td><td>"read", "write", "admin" — fine-grained per study</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key design decisions -->
+            <div class="project-section">
+                <h2><i class="fas fa-sitemap"></i> Key Design Decisions</h2>
+
+                <div class="relations-grid">
+                    <div class="project-info-card">
+                        <h3><span class="db-relation-badge">GDPR</span> Identity Separation</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">
+                            PARTICIPANT contains zero personally identifiable information. The <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">participant_code</code> is a system-generated opaque token. The mapping to real patient identity (MRN, name, national ID) lives in an <strong>IDENTITY_LINK table stored in a completely separate database</strong> — physically and logically isolated, accessible only to authorised clinical staff, not to the research application.
+                        </p>
+                    </div>
+                    <div class="project-info-card">
+                        <h3><span class="db-relation-badge">EAV</span> Dynamic Variables</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">
+                            Rather than hard-coding columns like <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">blood_pressure</code> or <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">tumour_size</code>, the schema uses a VARIABLE catalogue and OBSERVATION rows — a controlled Entity-Attribute-Value pattern. This lets completely different studies reuse the same tables without schema migrations, while the known set of variables ensures data integrity.
+                        </p>
+                    </div>
+                    <div class="project-info-card">
+                        <h3><span class="db-relation-badge">1:N</span> Longitudinal Visits</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">
+                            All clinical data — both scalar OBSERVATION values and FILE_ASSET entries — hangs off a VISIT row, not directly off PARTICIPANT. This means every measurement is automatically time-stamped and ordered. The <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">is_longitudinal</code> flag on STUDY_VARIABLE further distinguishes variables collected once (e.g. sex) from those collected at every visit (e.g. weight).
+                        </p>
+                    </div>
+                    <div class="project-info-card">
+                        <h3><span class="db-relation-badge">RBAC</span> Role-Based Access</h3>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">
+                            The combination of ROLE (global permission type), app_user_has_ROLE (user-role assignment), and USER_STUDY_ACCESS (per-study permission level) implements a two-layer access control system. A supervisor can see all data for their assigned studies; a data-entry user can only write to theirs; a general admin has unrestricted access.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What I learned -->
+            <div class="project-section">
+                <h2><i class="fas fa-road"></i> What I Learned</h2>
+                <p>This was the most complex data modelling exercise I had tackled, because the requirements were genuinely contradictory at first glance: the schema had to be <strong>flexible</strong> (different studies, different variables) yet <strong>rigid enough to be queryable</strong> (you can't analyse data you can't find). Resolving that tension through the VARIABLE catalogue and STUDY_VARIABLE junction — rather than reaching for a schema-less NoSQL approach — taught me when relational design is the right tool even for variable-structure data.</p>
+                <p>The GDPR identity-separation requirement was the most interesting constraint. It forced me to think beyond the database itself and consider <strong>system architecture</strong>: what lives where, who can access what, and how the two databases talk to each other only through controlled, auditable queries. This is a pattern I expect to encounter often in health data engineering.</p>
+            </div>
+
+        </div>
+
+        <div class="project-footer-nav">
+            <a href="project-clustal.html"><i class="fas fa-arrow-left"></i> Previous Project</a>
+            <a href="index.html#projects">All Projects <i class="fas fa-th"></i></a>
+        </div>
+
+    </div>
+
+    <s
+
+    <script src="script.js"></script>
+</body>
+</html>
