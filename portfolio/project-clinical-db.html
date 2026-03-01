@@ -56,7 +56,7 @@
                 <span class="project-hero-category">Clinical Informatics · Relational DB Design · GDPR</span>
             </div>
             <h1>Clinical Trials Database</h1>
-            <p class="project-hero-sub">A production-grade relational data model for managing hospital clinical trials — built around pseudonymised participants, longitudinal visit data, flexible per-study variables, file assets, and a GDPR-compliant identity separation architecture.</p>
+            <p class="project-hero-sub">A production-grade relational data model for managing hospital clinical trials, built around pseudonymised participants, longitudinal visit data, flexible per-study variables, file assets and a GDPR-compliant identity separation architecture.</p>
             <div class="project-hero-tags">
                 <div class="tags">
                     <span>MySQL</span><span>ER Modelling</span><span>Clinical Data</span><span>GDPR</span><span>Normalisation</span><span>Relational Design</span>
@@ -70,8 +70,8 @@
             <!-- Purpose -->
             <div class="project-section">
                 <h2><i class="fas fa-hospital"></i> Purpose & Context</h2>
-                <p>This data model was designed for the role of <strong>manager of a hospital clinical trials support service</strong>. The challenge was to build a single database that could serve <em>multiple simultaneous clinical studies</em>, each with its own set of measured variables, participant lists, and data-collection schedules — while meeting strict legal and ethical requirements around patient identity protection.</p>
-                <p>Real clinical trial databases face a fundamental tension: they need to be flexible enough to accommodate completely different studies (a cardiology trial measuring blood pressure over 12 visits looks very different from an oncology trial collecting tumour imaging files at three time points), yet structured enough to guarantee data integrity, auditability, and GDPR compliance. This schema resolves that tension through a combination of a <strong>dynamic variable system</strong>, a <strong>visit-based longitudinal structure</strong>, and an <strong>external identity-link table</strong> stored in a separate database.</p>
+                <p>This data model was designed for the role of <strong>manager of a hospital clinical trials support service</strong>. The challenge was to build a single database that could serve <em>multiple simultaneous clinical studies</em>, each with its own set of measured variables, participant lists and data-collection schedules, while meeting strict legal and ethical requirements around patient identity protection.</p>
+                <p>Real clinical trial databases face a fundamental tension: they need to be flexible enough to accommodate completely different studies (a cardiology trial measuring blood pressure over 12 visits looks very different from an oncology trial collecting tumour imaging files at three time points), yet structured enough to guarantee data integrity, auditability and GDPR compliance. This schema resolves that tension through a combination of a <strong>dynamic variable system</strong>, a <strong>visit-based longitudinal structure</strong> and an <strong>external identity-link table</strong> stored in a separate database.</p>
             </div>
 
             <!-- ER Diagram -->
@@ -87,7 +87,7 @@
             <!-- Table breakdown -->
             <div class="project-section">
                 <h2><i class="fas fa-table"></i> Table-by-Table Breakdown</h2>
-                <p>The schema is composed of 12 tables organised into four logical groups: <strong>study management</strong>, <strong>participants & visits</strong>, <strong>clinical data</strong>, and <strong>users & access control</strong>. Each is explained below.</p>
+                <p>The schema is composed of 12 tables organised into four logical groups: <strong>study management</strong>, <strong>participants and visits</strong>, <strong>clinical data</strong>, and <strong>users and access control</strong>. Each is explained below.</p>
 
                 <!-- Study management group -->
                 <div class="db-group-label">Study Management</div>
@@ -126,7 +126,7 @@
                     <div class="project-info-card">
                         <h3><i class="fas fa-address-card" style="color:var(--accent);margin-right:6px;"></i> CONTACT</h3>
                         <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
-                            The principal investigator or designated contact for a study — kept separate from LAB to allow different people to be responsible for different studies within the same lab.
+                            The principal investigator or designated contact for a study, kept separate from LAB to allow different people to be responsible for different studies within the same lab.
                         </p>
                         <table class="schema-table">
                             <tr><td class="col-pk">🔑</td><td><code>contact_id</code></td><td>Primary key</td></tr>
@@ -140,7 +140,7 @@
                     <div class="project-info-card">
                         <h3><i class="fas fa-sliders-h" style="color:var(--accent);margin-right:6px;"></i> VARIABLE</h3>
                         <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
-                            A catalogue of all possible clinical data items (e.g. "systolic_bp", "tumour_volume", "haemoglobin"). The label of stored data is not static — it comes from this table, making the schema flexible across completely different study types.
+                            A catalogue of all possible clinical data items (e.g. "systolic_bp", "tumour_volume", "haemoglobin"). The label of stored data is not static, it comes from this table, making the schema flexible across completely different study types.
                         </p>
                         <table class="schema-table">
                             <tr><td class="col-pk">🔑</td><td><code>variable_id</code></td><td>Primary key</td></tr>
@@ -172,7 +172,7 @@
                     <div class="project-info-card">
                         <h3><i class="fas fa-user-shield" style="color:var(--accent);margin-right:6px;"></i> PARTICIPANT</h3>
                         <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
-                            Stores pseudonymised participant records. There is <strong>no name, date of birth, or national ID</strong> in this table — only a system-generated code. The link to real patient identity is stored in a completely separate database (IDENTITY_LINK), as required by GDPR and clinical trial regulations.
+                            Stores pseudonymised participant records. There is <strong>no name, date of birth, or national ID</strong> in this table, only a system-generated code. The link to real patient identity is stored in a completely separate database (IDENTITY_LINK), as required by GDPR and clinical trial regulations.
                         </p>
                         <table class="schema-table">
                             <tr><td class="col-pk">🔑</td><td><code>participant_id</code></td><td>Auto-generated surrogate primary key</td></tr>
@@ -206,7 +206,7 @@
                     <div class="project-info-card">
                         <h3><i class="fas fa-chart-line" style="color:var(--accent);margin-right:6px;"></i> OBSERVATION</h3>
                         <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
-                            Stores scalar clinical measurements — a single numeric or text value for a given variable at a given visit. This table is the main store for structured clinical data (blood pressure, lab results, survey scores, etc.).
+                            Stores scalar clinical measurements, a single numeric or text value for a given variable at a given visit. This table is the main store for structured clinical data (blood pressure, lab results, survey scores, etc.).
                         </p>
                         <table class="schema-table">
                             <tr><td class="col-pk">🔑</td><td><code>observation_id</code></td><td>Primary key</td></tr>
@@ -220,7 +220,7 @@
                     <div class="project-info-card">
                         <h3><i class="fas fa-file-medical" style="color:var(--accent);margin-right:6px;"></i> FILE_ASSET</h3>
                         <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
-                            Handles binary clinical data — MRI images, genomic sequencing files, ECG recordings, etc. Files are not stored in the database itself; instead, this table stores a URI pointing to the file in an object store or file system.
+                            Handles binary clinical data, MRI images, genomic sequencing files, ECG recordings, etc. Files are not stored in the database itself; instead, this table stores a URI pointing to the file in an object store or file system.
                         </p>
                         <table class="schema-table">
                             <tr><td class="col-pk">🔑</td><td><code>file_id</code></td><td>Primary key (UUID or auto-increment)</td></tr>
@@ -239,7 +239,7 @@
                     <div class="project-info-card">
                         <h3><i class="fas fa-user-cog" style="color:var(--accent);margin-right:6px;"></i> app_user</h3>
                         <p style="color:var(--text-dim);font-size:0.87rem;line-height:1.7;">
-                            Application users — the people who log in to enter or review data. Kept entirely separate from clinical participants to avoid any data confusion.
+                            Application users, the people who log in to enter or review data. Kept entirely separate from clinical participants to avoid any data confusion.
                         </p>
                         <table class="schema-table">
                             <tr><td class="col-pk">🔑</td><td><code>user_id</code></td><td>Primary key</td></tr>
@@ -293,19 +293,19 @@
                     <div class="project-info-card">
                         <h3><span class="db-relation-badge">GDPR</span> Identity Separation</h3>
                         <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">
-                            PARTICIPANT contains zero personally identifiable information. The <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">participant_code</code> is a system-generated opaque token. The mapping to real patient identity (MRN, name, national ID) lives in an <strong>IDENTITY_LINK table stored in a completely separate database</strong> — physically and logically isolated, accessible only to authorised clinical staff, not to the research application.
+                            PARTICIPANT contains zero personally identifiable information. The <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">participant_code</code> is a system-generated opaque token. The mapping to real patient identity (MRN, name, national ID) lives in an <strong>IDENTITY_LINK table stored in a completely separate database</strong>, physically and logically isolated, accessible only to authorised clinical staff, not to the research application.
                         </p>
                     </div>
                     <div class="project-info-card">
                         <h3><span class="db-relation-badge">EAV</span> Dynamic Variables</h3>
                         <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">
-                            Rather than hard-coding columns like <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">blood_pressure</code> or <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">tumour_size</code>, the schema uses a VARIABLE catalogue and OBSERVATION rows — a controlled Entity-Attribute-Value pattern. This lets completely different studies reuse the same tables without schema migrations, while the known set of variables ensures data integrity.
+                            Rather than hard-coding columns like <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">blood_pressure</code> or <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">tumour_size</code>, the schema uses a VARIABLE catalogue and OBSERVATION rows, a controlled Entity-Attribute-Value pattern. This lets completely different studies reuse the same tables without schema migrations, while the known set of variables ensures data integrity.
                         </p>
                     </div>
                     <div class="project-info-card">
                         <h3><span class="db-relation-badge">1:N</span> Longitudinal Visits</h3>
                         <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">
-                            All clinical data — both scalar OBSERVATION values and FILE_ASSET entries — hangs off a VISIT row, not directly off PARTICIPANT. This means every measurement is automatically time-stamped and ordered. The <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">is_longitudinal</code> flag on STUDY_VARIABLE further distinguishes variables collected once (e.g. sex) from those collected at every visit (e.g. weight).
+                            All clinical data (both scalar OBSERVATION values and FILE_ASSET entries) hangs off a VISIT row, not directly off PARTICIPANT. This means every measurement is automatically time-stamped and ordered. The <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">is_longitudinal</code> flag on STUDY_VARIABLE further distinguishes variables collected once (e.g. sex) from those collected at every visit (e.g. weight).
                         </p>
                     </div>
                     <div class="project-info-card">
@@ -320,7 +320,7 @@
             <!-- What I learned -->
             <div class="project-section">
                 <h2><i class="fas fa-road"></i> What I Learned</h2>
-                <p>This was the most complex data modelling exercise I had tackled, because the requirements were genuinely contradictory at first glance: the schema had to be <strong>flexible</strong> (different studies, different variables) yet <strong>rigid enough to be queryable</strong> (you can't analyse data you can't find). Resolving that tension through the VARIABLE catalogue and STUDY_VARIABLE junction — rather than reaching for a schema-less NoSQL approach — taught me when relational design is the right tool even for variable-structure data.</p>
+                <p>This was the most complex data modelling exercise I had tackled, because the requirements were genuinely contradictory at first glance: the schema had to be <strong>flexible</strong> (different studies, different variables) yet <strong>rigid enough to be queryable</strong> (you can't analyse data you can't find). Resolving that tension through the VARIABLE catalogue and STUDY_VARIABLE junction (rather than reaching for a schema-less NoSQL approach) taught me when relational design is the right tool even for variable-structure data.</p>
                 <p>The GDPR identity-separation requirement was the most interesting constraint. It forced me to think beyond the database itself and consider <strong>system architecture</strong>: what lives where, who can access what, and how the two databases talk to each other only through controlled, auditable queries. This is a pattern I expect to encounter often in health data engineering.</p>
             </div>
 

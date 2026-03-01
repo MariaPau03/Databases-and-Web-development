@@ -700,6 +700,15 @@ body {
     color: var(--text-dim);
 }
 
+/* Custom text styles */
+.uni-purple {
+    color: rgba(232, 195, 255, 0.3);
+}
+
+.cursive {
+    font-style: italic;
+}
+
 /* 11. Projects */
 .project-grid {
     display: flex;

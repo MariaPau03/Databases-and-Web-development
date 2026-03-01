@@ -56,7 +56,7 @@
                 <span class="project-hero-category">Bioinformatics · Web Application · Sequence Analysis</span>
             </div>
             <h1>ClustalΩ Web Application</h1>
-            <p class="project-hero-sub">A Flask-based web interface for running multiple sequence alignments with Clustal-Omega directly from the browser — supporting FASTA sequences, UniProt IDs, PDB entry IDs, and file uploads, with automatic input detection and downloadable results.</p>
+            <p class="project-hero-sub">A Flask-based web interface for running multiple sequence alignments with Clustal-Omega directly from the browser, supporting FASTA sequences, UniProt IDs, PDB entry IDs and file uploads, with automatic input detection and downloadable results.</p>
             <div class="project-hero-tags">
                 <div class="tags">
                     <span>Python</span><span>Flask</span><span>Clustal-Omega</span><span>HTML/CSS/JS</span><span>REST APIs</span><span>MSA</span>
@@ -77,8 +77,8 @@
             <!-- Overview -->
             <div class="project-section">
                 <h2><i class="fas fa-lightbulb"></i> Overview</h2>
-                <p>Multiple sequence alignment (MSA) is one of the most fundamental operations in comparative genomics and molecular evolution. It allows researchers to identify conserved regions across sequences, infer evolutionary relationships, and find functional motifs shared across species or protein families.</p>
-                <p>This project wraps the industry-standard <strong>Clustal-Omega</strong> command-line tool in a clean web interface so that it can be used without any bioinformatics setup or command-line knowledge. The application runs on a university server and accepts sequences from four different sources — handling everything from raw FASTA input to live database lookups — then returns a formatted alignment with a one-click download.</p>
+                <p>Multiple sequence alignment (MSA) is one of the most fundamental operations in comparative genomics and molecular evolution. It allows researchers to identify conserved regions across sequences, infer evolutionary relationships and find functional motifs shared across species or protein families.</p>
+                <p>This project wraps the industry-standard <strong>Clustal-Omega</strong> command-line tool in a clean web interface so that it can be used without any bioinformatics setup or command-line knowledge. The application runs on a university server and accepts sequences from four different sources, handling everything from raw FASTA input to live database lookups, then returns a formatted alignment with a one-click download.</p>
             </div>
 
             <!-- Goals & Stack -->
@@ -91,7 +91,7 @@
                         <li>Fetch sequences live from UniProt and RCSB PDB APIs</li>
                         <li>Validate input and give meaningful, specific error messages</li>
                         <li>Return results in 7 standard alignment formats, downloadable</li>
-                        <li>Handle protein, DNA, and RNA sequences correctly</li>
+                        <li>Handle protein, DNA and RNA sequences correctly</li>
                     </ul>
                 </div>
                 <div class="project-info-card">
@@ -119,11 +119,11 @@
                     </div>
                     <div class="project-info-card">
                         <h3>Stage 2 — Validation</h3>
-                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">Every FASTA sequence is parsed line-by-line and checked against the IUPAC alphabet for the selected molecule type (protein, DNA, or RNA). Specific errors are raised for missing headers, empty sequences, invalid residue characters, and fewer than 2 sequences — with messages that tell the user exactly what to fix.</p>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">Every FASTA sequence is parsed line-by-line and checked against the IUPAC alphabet for the selected molecule type (protein, DNA, or RNA). Specific errors are raised for missing headers, empty sequences, invalid residue characters and fewer than 2 sequences, with messages that tell the user exactly what to fix.</p>
                     </div>
                     <div class="project-info-card">
                         <h3>Stage 3 — Execution</h3>
-                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">The validated FASTA is written to a temporary file with a unique UUID, and Clustal-Omega is called as a subprocess with the user's chosen options — output format, sequence type (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">--seqtype</code>), guide-tree iterations, and any extra flags. The result file is stored for download and its content is returned to the frontend as JSON.</p>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">The validated FASTA is written to a temporary file with a unique UUID, and Clustal-Omega is called as a subprocess with the user's chosen options, output format, sequence type (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">--seqtype</code>), guide-tree iterations, and any extra flags. The result file is stored for download and its content is returned to the frontend as JSON.</p>
                     </div>
                     <div class="project-info-card">
                         <h3>Stage 4 — Output & Download</h3>
@@ -137,10 +137,10 @@
                 <h2><i class="fas fa-keyboard"></i> Input Modes</h2>
                 <p>A key design decision was to avoid asking the user to declare what kind of input they are providing. Instead, the backend detects the format automatically using regular expression matching and heuristics:</p>
                 <ul>
-                    <li><strong>FASTA sequences</strong> — pasted directly; the first non-blank line must start with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">&gt;</code>. If the user pastes raw sequence letters without a header, the app detects this and explains the correct format rather than failing silently.</li>
-                    <li><strong>UniProt accession IDs</strong> — tokens matching the UniProt pattern (e.g. <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">P69905</code>) trigger a live fetch from <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">uniprot.org/uniprot/{ID}.fasta</code>. Partial failures (one bad ID among many) surface as warnings rather than blocking the alignment.</li>
-                    <li><strong>PDB entry IDs</strong> — 4-character codes (e.g. <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">1HHO</code>) are fetched from <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">rcsb.org/fasta/entry/{ID}</code>. Chain suffixes such as <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">1SBIA</code> are stripped automatically.</li>
-                    <li><strong>File upload</strong> — drag-and-drop or file-picker upload of <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.fasta</code>, <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.fa</code>, <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.fas</code>, <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.txt</code>, or <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.seq</code> files up to 16 MB.</li>
+                    <li><strong>FASTA sequences</strong> —> pasted directly; the first non-blank line must start with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">&gt;</code>. If the user pastes raw sequence letters without a header, the app detects this and explains the correct format rather than failing silently.</li>
+                    <li><strong>UniProt accession IDs</strong> —> tokens matching the UniProt pattern (e.g. <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">P69905</code>) trigger a live fetch from <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">uniprot.org/uniprot/{ID}.fasta</code>. Partial failures (one bad ID among many) surface as warnings rather than blocking the alignment.</li>
+                    <li><strong>PDB entry IDs</strong> —> 4-character codes (e.g. <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">1HHO</code>) are fetched from <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">rcsb.org/fasta/entry/{ID}</code>. Chain suffixes such as <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">1SBIA</code> are stripped automatically.</li>
+                    <li><strong>File upload</strong> —> drag-and-drop or file-picker upload of <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.fasta</code>, <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.fa</code>, <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.fas</code>, <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.txt</code>, or <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.seq</code> files up to 16 MB.</li>
                 </ul>
             </div>
 
@@ -169,18 +169,18 @@
                 <h2><i class="fas fa-shield-alt"></i> Security Considerations</h2>
                 <p>Because the app runs an external binary on user-provided input, several layers of protection were added to prevent misuse:</p>
                 <ul>
-                    <li><strong>No shell expansion</strong> — <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">clustalo</code> is called via a Python list argument to <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">subprocess.run()</code>, never through a shell string, making shell injection impossible.</li>
-                    <li><strong>Extra-options blocklist</strong> — user-supplied CLI flags are parsed with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">shlex.split()</code> and rejected if they contain shell metacharacters (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">; | & ` $ &lt; &gt;</code>).</li>
-                    <li><strong>Download path validation</strong> — the <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">/download/&lt;filename&gt;</code> route validates the filename against a strict regex before constructing any file path, preventing directory traversal attacks.</li>
-                    <li><strong>Upload size cap</strong> — Flask's <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">MAX_CONTENT_LENGTH</code> is set to 16 MB. Input files are deleted immediately after the subprocess exits.</li>
+                    <li><strong>No shell expansion</strong> —> <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">clustalo</code> is called via a Python list argument to <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">subprocess.run()</code>, never through a shell string, making shell injection impossible.</li>
+                    <li><strong>Extra-options blocklist</strong> —> user-supplied CLI flags are parsed with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">shlex.split()</code> and rejected if they contain shell metacharacters (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">; | & ` $ &lt; &gt;</code>).</li>
+                    <li><strong>Download path validation</strong> —> the <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">/download/&lt;filename&gt;</code> route validates the filename against a strict regex before constructing any file path, preventing directory traversal attacks.</li>
+                    <li><strong>Upload size cap</strong> —> Flask's <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">MAX_CONTENT_LENGTH</code> is set to 16 MB. Input files are deleted immediately after the subprocess exits.</li>
                 </ul>
             </div>
 
             <!-- What I Learned -->
             <div class="project-section">
                 <h2><i class="fas fa-road"></i> What I Learned</h2>
-                <p>This project forced me to think about the full lifecycle of a bioinformatics tool — not just the science, but the engineering around it. Wrapping a command-line binary in a web interface is deceptively tricky: you have to handle everything the binary would normally tell the user via interactive prompts or manual flag inspection, and surface it clearly in a UI designed for researchers who may not be comfortable with the terminal.</p>
-                <p>The most interesting technical challenge was the <strong>auto-detection logic</strong>. The naive approach (just check if it starts with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">&gt;</code>) breaks immediately when users paste sequences without headers, or when a PDB ID like <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">1SBI</code> is ambiguous with a short sequence. Building the detection to be both robust and informative — giving users a specific, actionable error rather than "unrecognized format" — required careful iteration.</p>
+                <p>This project forced me to think about the full lifecycle of a bioinformatics tool, not just the science, but the engineering around it. Wrapping a command-line binary in a web interface is deceptively tricky, you have to handle everything the binary would normally tell the user via interactive prompts or manual flag inspection and surface it clearly in a UI designed for researchers who may not be comfortable with the terminal.</p>
+                <p>The most interesting technical challenge was the <strong>auto-detection logic</strong>. The naive approach (just check if it starts with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">&gt;</code>) breaks immediately when users paste sequences without headers, or when a PDB ID like <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">1SBI</code> is ambiguous with a short sequence. Building the detection to be both robust and informative, giving users a specific, actionable error rather than "unrecognized format", required careful iteration.</p>
                 <p>On the deployment side, I learned the practical aspects of running Flask in a production environment using Gunicorn, managing persistent processes on a shared university server, and using GitHub as the deployment pipeline so updates are a single <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">git pull</code> away.</p>
             </div>
 
