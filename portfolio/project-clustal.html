@@ -97,11 +97,11 @@
                 <div class="project-info-card">
                     <h3><i class="fas fa-layer-group"></i> &nbsp;Tech Stack</h3>
                     <ul class="project-section">
-                        <li><strong>Backend:</strong> Python 3.10 + Flask</li>
-                        <li><strong>Alignment engine:</strong> Clustal-Omega 1.2.4 (subprocess)</li>
+                        <li><strong>Backend:</strong> PHP 8 (no framework)</li>
+                        <li><strong>Alignment engine:</strong> Clustal-Omega 1.2.4 (exec)</li>
                         <li><strong>Sequence APIs:</strong> UniProt REST, RCSB PDB REST</li>
                         <li><strong>Frontend:</strong> Vanilla HTML, CSS, JavaScript</li>
-                        <li><strong>Deployment:</strong> Gunicorn on university server</li>
+                        <li><strong>Deployment:</strong> PHP on university Apache server</li>
                         <li><strong>Version control:</strong> GitHub</li>
                     </ul>
                 </div>
@@ -110,7 +110,7 @@
             <!-- How it works -->
             <div class="project-section">
                 <h2><i class="fas fa-cogs"></i> How It Works</h2>
-                <p>The application is structured around a single Flask route (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 6px;border-radius:4px;">POST /align</code>) that handles the entire alignment pipeline. When a user submits the form, the backend processes the request in three sequential stages before returning the result:</p>
+                <p>The application is structured around a single PHP endpoint (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 6px;border-radius:4px;">align.php</code>) that handles the entire alignment pipeline. When a user submits the form, the backend processes the request in three sequential stages before returning the result:</p>
 
                 <div class="relations-grid">
                     <div class="project-info-card">
@@ -123,7 +123,7 @@
                     </div>
                     <div class="project-info-card">
                         <h3>Stage 3 — Execution</h3>
-                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">The validated FASTA is written to a temporary file with a unique UUID, and Clustal-Omega is called as a subprocess with the user's chosen options, output format, sequence type (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">--seqtype</code>), guide-tree iterations, and any extra flags. The result file is stored for download and its content is returned to the frontend as JSON.</p>
+                        <p style="color:var(--text-dim);font-size:0.88rem;line-height:1.65;">The validated FASTA is written to a temporary file with a unique random ID, and Clustal-Omega is called via PHP's <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">exec()</code> with the user's chosen options, output format, sequence type (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:1px 5px;border-radius:4px;">--seqtype</code>), guide-tree iterations, and any extra flags. The result file is stored for download and its content is returned to the frontend as JSON.</p>
                     </div>
                     <div class="project-info-card">
                         <h3>Stage 4 — Output & Download</h3>
@@ -169,10 +169,10 @@
                 <h2><i class="fas fa-shield-alt"></i> Security Considerations</h2>
                 <p>Because the app runs an external binary on user-provided input, several layers of protection were added to prevent misuse:</p>
                 <ul>
-                    <li><strong>No shell expansion</strong> —> <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">clustalo</code> is called via a Python list argument to <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">subprocess.run()</code>, never through a shell string, making shell injection impossible.</li>
+                    <li><strong>No shell expansion</strong> —> <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">clustalo</code> is called via PHP's <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">exec()</code> with every argument individually escaped using <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">escapeshellarg()</code>, making shell injection impossible.</li>
                     <li><strong>Extra-options blocklist</strong> —> user-supplied CLI flags are parsed with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">shlex.split()</code> and rejected if they contain shell metacharacters (<code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">; | & ` $ &lt; &gt;</code>).</li>
                     <li><strong>Download path validation</strong> —> the <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">/download/&lt;filename&gt;</code> route validates the filename against a strict regex before constructing any file path, preventing directory traversal attacks.</li>
-                    <li><strong>Upload size cap</strong> —> Flask's <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">MAX_CONTENT_LENGTH</code> is set to 16 MB. Input files are deleted immediately after the subprocess exits.</li>
+                    <li><strong>Upload size cap</strong> —> PHP's <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">upload_max_filesize</code> is set to 16 MB. Input files are deleted immediately after the alignment exits.</li>
                 </ul>
             </div>
 
@@ -181,7 +181,7 @@
                 <h2><i class="fas fa-road"></i> What I Learned</h2>
                 <p>This project forced me to think about the full lifecycle of a bioinformatics tool, not just the science, but the engineering around it. Wrapping a command-line binary in a web interface is deceptively tricky, you have to handle everything the binary would normally tell the user via interactive prompts or manual flag inspection and surface it clearly in a UI designed for researchers who may not be comfortable with the terminal.</p>
                 <p>The most interesting technical challenge was the <strong>auto-detection logic</strong>. The naive approach (just check if it starts with <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">&gt;</code>) breaks immediately when users paste sequences without headers, or when a PDB ID like <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">1SBI</code> is ambiguous with a short sequence. Building the detection to be both robust and informative, giving users a specific, actionable error rather than "unrecognized format", required careful iteration.</p>
-                <p>On the deployment side, I learned the practical aspects of running Flask in a production environment using Gunicorn, managing persistent processes on a shared university server, and using GitHub as the deployment pipeline so updates are a single <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">git pull</code> away.</p>
+                <p>On the deployment side, I learned the practical aspects of running a PHP application on a shared university Apache server — no virtual environments or process managers needed, just dropping files into <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">public_html</code> and pointing to the binary via <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">.htaccess</code>. Updates are a single <code style="background:rgba(124,106,247,0.1);color:var(--accent-2);padding:2px 6px;border-radius:4px;">git pull</code> away.</p>
             </div>
 
         </div>
