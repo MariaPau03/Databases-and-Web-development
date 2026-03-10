@@ -88,7 +88,7 @@ function fetch_uniprot(string $uid): array {
     $uid = strtoupper(trim($uid));
     [$body, $err] = http_get("https://www.uniprot.org/uniprot/{$uid}.fasta");
     if ($err) return [null, "UniProt '{$uid}': $err"];
-    if (!str_starts_with(trim($body), '>')) return [null, "UniProt '{$uid}': response is not FASTA."];
+    if (!strpos(trim($body), '>') === 0) return [null, "UniProt '{$uid}': response is not FASTA."];
     return [$body, null];
 }
 
@@ -99,7 +99,7 @@ function fetch_pdb(string $pid): array {
     $pid = strtoupper(trim($pid));
     [$body, $err] = http_get("https://www.rcsb.org/fasta/entry/{$pid}");
     if ($err) return [null, "PDB '{$pid}': $err"];
-    if (!str_starts_with(trim($body), '>')) return [null, "PDB '{$pid}': response is not FASTA."];
+    if (!strpos(trim($body), '>') === 0) return [null, "PDB '{$pid}': response is not FASTA."];
     return [$body, null];
 }
 
@@ -151,7 +151,7 @@ function validate_fasta(string $text, string $seq_type): array {
         $line = trim($raw_line);
         if ($line === '') continue;
 
-        if (str_starts_with($line, '>')) {
+        if (strpos($line, '>') === 0) {
             // Save previous sequence
             if ($current_id !== null) {
                 $seq = implode('', $current_seq);
