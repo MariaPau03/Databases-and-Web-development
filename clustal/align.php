@@ -166,11 +166,10 @@ function validate_fasta(string $text, string $seq_type): array {
                 return ['sequences' => null, 'error' => "Sequence data found before any FASTA header ('>...')."];
             }
             $cleaned = preg_replace('/\s/', '', $line);
-            // Find invalid characters
-            $invalid_chars = preg_replace(str_replace('/', '/i', $bad_re), '', $cleaned);
-            if ($invalid_chars !== '') {
-                // Get unique bad chars
-                $bad_sample = implode('', array_unique(str_split($invalid_chars)));
+            // Find invalid characters using the pattern directly
+            preg_match_all($bad_re, $cleaned, $bad_matches);
+            if (!empty($bad_matches[0])) {
+                $bad_sample = implode('', array_unique($bad_matches[0]));
                 $bad_sample = substr($bad_sample, 0, 10);
                 return [
                     'sequences' => null,

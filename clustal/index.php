@@ -597,8 +597,15 @@ P01942" style="min-height:120px;"></textarea>
     document.getElementById('results-content').classList.remove('show');
 
     try {
-      const resp = await fetch('align.php', { method: 'POST', body: fd });
-      const data = await resp.json();
+      const resp = await fetch('./align.php', { method: 'POST', body: fd });
+      const text = await resp.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch(e) {
+        showAlert('error', '✗ Server returned unexpected response:\n' + text.substring(0, 600));
+        return;
+      }
       stopProgress();
 
       if (!data.success) {
