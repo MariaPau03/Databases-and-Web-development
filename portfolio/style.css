@@ -1660,3 +1660,97 @@ body {
     0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(79,196,207,0.5); }
     50%       { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 5px rgba(79,196,207,0); }
 }
+
+/* =============================================
+   MUSIC SECTION
+============================================= */
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.music-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.3s cubic-bezier(0.4,0,0.2,1),
+                border-color 0.3s;
+    cursor: pointer;
+}
+
+.music-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(124,106,247,0.45);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+}
+
+/* Coloured icon banner at top */
+.music-card-icon {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: rgba(255,255,255,0.9);
+    transition: transform 0.3s ease;
+}
+.music-card:hover .music-card-icon {
+    transform: scale(1.08);
+}
+
+.music-card-body {
+    flex: 1;
+    padding: 16px 16px 8px;
+}
+.music-card-body h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+.music-card-body p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Spotify CTA at bottom */
+.music-card-cta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1db954;
+    letter-spacing: 0.03em;
+    border-top: 1px solid var(--card-border);
+    transition: background 0.2s;
+}
+.music-card:hover .music-card-cta {
+    background: rgba(29,185,84,0.08);
+}
+.music-card-cta i {
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .music-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 700px) {
+    .music-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+    .music-grid { grid-template-columns: 1fr; }
+}
